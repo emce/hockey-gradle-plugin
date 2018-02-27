@@ -5,12 +5,13 @@ import org.gradle.api.Project
 
 class HockeyPlugin : Plugin<Project> {
     override fun apply(project: Project) {
-        val hockeyExt = project.extensions.create("hockey", HockeyExtension::class.java)
+        val artifacts = project.container(Artifact::class.java)
+        val hockeyExt = project.extensions.add("hockey", artifacts)
         project.afterEvaluate {
-            for ((variant, token) in hockeyExt.variantToApiToken) {
-                project.tasks.create("upload${variant.capitalize()}", HockeyUploadTask::class.java, {
-                    it.apiToken = token
-                    it.artifactPath = hockeyExt.variantToOutputFile[variant]!!
+            artifacts.forEach { artifact ->
+                project.tasks.create("upload${artifact.name.capitalize()}", HockeyUploadTask::class.java, {
+                    it.apiToken = artifact.apiToken
+                    it.artifactPath = artifact.path
                 })
             }
         }
