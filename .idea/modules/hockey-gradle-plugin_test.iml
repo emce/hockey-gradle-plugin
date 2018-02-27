@@ -119,7 +119,6 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="hockey-gradle-plugin_main" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -131,6 +130,7 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="module" module-name="hockey-gradle-plugin_main" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
